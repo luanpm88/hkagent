@@ -31,9 +31,40 @@
             <input type="email" class="form-control" />
         </div>
 
-        <h4 class="mt-4 mb-3">Ảnh thực tế</h4>
+        <h4 class="mt-5 mb-3">Ảnh thực tế</h4>
         <div>
-            <input id="myFileInput" type="file" accept="image/*;capture=camera">
+            <div class="d-inline-block me-2" style="cursor: pointer;">
+                <span class="d-inline-block p-4 border rounded shadow-sm">
+                    <span class="material-symbols-rounded fs-1 text-muted">
+                        add_a_photo
+                    </span>
+                </span>
+                <input id="myFileInput" type="file" accept="image/*;capture=camera" style="display:none;">
+            </div>
+            <div class="d-inline-block me-2" style="cursor: pointer;">
+                <span class="d-inline-block p-4 border rounded shadow-sm">
+                    <span class="material-symbols-rounded fs-1 text-muted">
+                        add_a_photo
+                    </span>
+                </span>
+                <input id="myFileInput" type="file" accept="image/*;capture=camera" style="display:none;">
+            </div>
+            <div class="d-inline-block me-2" style="cursor: pointer;">
+                <span class="d-inline-block p-4 border rounded shadow-sm">
+                    <span class="material-symbols-rounded fs-1 text-muted">
+                        add_a_photo
+                    </span>
+                </span>
+                <input id="myFileInput" type="file" accept="image/*;capture=camera" style="display:none;">
+            </div>
+            <div class="d-inline-block me-2" style="cursor: pointer;">
+                <span class="d-inline-block p-4 border rounded shadow-sm">
+                    <span class="material-symbols-rounded fs-1 text-muted">
+                        add_a_photo
+                    </span>
+                </span>
+                <input id="myFileInput" type="file" accept="image/*;capture=camera" style="display:none;">
+            </div>
             <script>
                 var myInput = document.getElementById('myFileInput');
 
@@ -49,7 +80,7 @@
             </script>
         </div>
 
-        <h4 class="mt-4 mb-3">Khảo sát</h4>
+        <h4 class="mt-5 mb-3">Khảo sát</h4>
         <div class="mb-3">
             <h6 class="my-2 text-bold">1. Cửa hàng có đang bán bồn nhựa?</h6>
             <div class="form-check">            
