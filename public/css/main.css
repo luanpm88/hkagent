@@ -1,0 +1,7 @@
+.pic-input-capture-box {
+    opacity: 0.8;
+    transition: all 0.2s ease-in-out;
+}
+.pic-input-capture-box:hover {
+    opacity: 1;
+}

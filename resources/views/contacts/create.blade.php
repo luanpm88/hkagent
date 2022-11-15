@@ -32,51 +32,65 @@
         </div>
 
         <h4 class="mt-5 mb-3">Ảnh thực tế</h4>
-        <div>
-            <div class="d-inline-block me-2" style="cursor: pointer;">
-                <span class="d-inline-block p-4 border rounded shadow-sm">
-                    <span class="material-symbols-rounded fs-1 text-muted">
-                        add_a_photo
-                    </span>
-                </span>
-                <input id="myFileInput" type="file" accept="image/*;capture=camera" style="display:none;">
-            </div>
-            <div class="d-inline-block me-2" style="cursor: pointer;">
-                <span class="d-inline-block p-4 border rounded shadow-sm">
-                    <span class="material-symbols-rounded fs-1 text-muted">
-                        add_a_photo
-                    </span>
-                </span>
-                <input id="myFileInput" type="file" accept="image/*;capture=camera" style="display:none;">
-            </div>
-            <div class="d-inline-block me-2" style="cursor: pointer;">
-                <span class="d-inline-block p-4 border rounded shadow-sm">
-                    <span class="material-symbols-rounded fs-1 text-muted">
-                        add_a_photo
-                    </span>
-                </span>
-                <input id="myFileInput" type="file" accept="image/*;capture=camera" style="display:none;">
-            </div>
-            <div class="d-inline-block me-2" style="cursor: pointer;">
-                <span class="d-inline-block p-4 border rounded shadow-sm">
-                    <span class="material-symbols-rounded fs-1 text-muted">
-                        add_a_photo
-                    </span>
-                </span>
-                <input id="myFileInput" type="file" accept="image/*;capture=camera" style="display:none;">
-            </div>
+        <div class="d-flex">
+            @for ($i = 0;$i < 4;$i++)
+                <div image-capture-thumb="image{{ $i }}" class="d-inline-block me-3 pic-input-capture-box border rounded p-2 shadow-sm" style="cursor: pointer;">
+                    <div>
+                        <div id="image{{ $i }}Placeholder">
+                            <span style="width: 100px;height:100px;" class="d-inline-block d-flex align-items-center justify-content-center">
+                                <span class="material-symbols-rounded fs-1 text-muted">
+                                    add_a_photo
+                                </span>
+                            </span>
+                        </div>
+                        <img height="100px" id="image{{ $i }}Thumb" src="" style="display:none" />
+                    </div>
+                    <input id="image{{ $i }}" type="file" accept="image/*;capture=camera" style="display:none;">
+                </div>
+            @endfor
             <script>
-                var myInput = document.getElementById('myFileInput');
+                var ImageCaptureBoxes = {
+                    groups: [],
+                    init: function() {
+                        var _this = this;
+                        $('[image-capture-thumb]').each(function(index,box) {
+                            _this.groups.push({
+                                box: $(box),
+                                input: $('#' + $(box).attr('image-capture-thumb')),
+                                thumb: $('#' + $(box).attr('image-capture-thumb') + 'Thumb'),
+                                placeholder: $('#' + $(box).attr('image-capture-thumb') + 'Placeholder')
+                            });
+                        });
 
-                function sendPic() {
-                    var file = myInput.files[0];
+                        // event
+                        _this.addEvents();
+                    },
+                    addEvents: function() {
+                        this.groups.forEach(function(group) {
+                            group.selectFile = function(file) {
+                                group.thumb[0].src = URL.createObjectURL(file);
 
-                    // Send file here either by adding it to a `FormData` object 
-                    // and sending that via XHR, or by simply passing the file into 
-                    // the `send` method of an XHR instance.
+                                group.thumb.show();
+                                group.placeholder.hide();
+                            };
+
+                            // click to box
+                            group.box.on('mouseup', function() {
+                                group.input.trigger('click');
+                            });
+
+                            // file change
+                            group.input.on('change', function() {
+                                var file = group.input[0].files[0];
+                                group.selectFile(file);
+                            });
+                        });
+                    }
                 }
 
-                myInput.addEventListener('change', sendPic, false);
+                $(function() {
+                    ImageCaptureBoxes.init();
+                });
             </script>
         </div>
 

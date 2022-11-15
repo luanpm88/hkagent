@@ -67,6 +67,7 @@
         
         <!-- Custom styles for this template -->
         <link href="{{ url('css/dashboard.css') }}" rel="stylesheet">
+        <link href="{{ url('css/main.css') }}" rel="stylesheet">
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
     </head>
