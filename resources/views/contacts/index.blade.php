@@ -40,7 +40,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">2</th>
                     <td>Cửa hảng VLXD Vĩnh Xích</td>
                     <td>123 Xã CGF, Lâm Đồng</td>
                     <td>0976 009 004</td>

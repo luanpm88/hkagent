@@ -66,12 +66,14 @@
         
         <!-- Custom styles for this template -->
         <link href="{{ url('css/dashboard.css') }}" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
     </head>
     <body>        
         <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">
-                <img src="{{ url('logo.png') }}" width="40px" />
-                LongNhien
+                <img src="{{ url('logo.png') }}" width="35px" />
+                <span class="text-muted ms-1 fw-bold">LONGNHIEN</span>
             </a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -88,68 +90,68 @@
             <div class="row">
                 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3 sidebar-sticky">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                        <span>General</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span data-feather="plus-circle" class="align-text-bottom"></span>
+                        </a>
+                    </h6>
                     <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                        <span data-feather="home" class="align-text-bottom"></span>
-                        Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                        <span data-feather="file" class="align-text-bottom"></span>
-                        Đại lý/Cửa hàng
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                        <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                        Đơn hàng
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                        <span data-feather="users" class="align-text-bottom"></span>
-                        Sản phẩm
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                        <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-                        Báo cáo
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                            <span data-feather="file" class="align-text-bottom"></span>
+                            Đại lý/Cửa hàng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                            <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                            Đơn hàng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                            <span data-feather="users" class="align-text-bottom"></span>
+                            Sản phẩm
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                            <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+                            Báo cáo
+                            </a>
+                        </li>
                     </ul>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-                    <span>Saved reports</span>
-                    <a class="link-secondary" href="#" aria-label="Add a new report">
-                        <span data-feather="plus-circle" class="align-text-bottom"></span>
-                    </a>
+                        <span>Reports</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span data-feather="plus-circle" class="align-text-bottom"></span>
+                        </a>
                     </h6>
                     <ul class="nav flex-column mb-2">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                         <span data-feather="file-text" class="align-text-bottom"></span>
-                        Current month
+                            Current month
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                         <span data-feather="file-text" class="align-text-bottom"></span>
-                        Last quarter
+                            Last quarter
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                         <span data-feather="file-text" class="align-text-bottom"></span>
-                        Social engagement
+                            Social engagement
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                         <span data-feather="file-text" class="align-text-bottom"></span>
-                        Year-end sale
+                            Year-end sale
                         </a>
                     </li>
                     </ul>
