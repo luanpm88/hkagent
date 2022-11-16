@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
+use App\Models\ContactImage;
+use Illuminate\Support\Facades\Storage;
 
 class Contact extends Model
 {
@@ -15,6 +17,11 @@ class Contact extends Model
         'name', 'email', 'address', 'phone', 'phone_2'
     ];
 
+    public function images()
+    {
+        return $this->hasMany(ContactImage::class);
+    }
+
     public static function initialize()
     {
         $contact = new self();
@@ -22,18 +29,23 @@ class Contact extends Model
         return $contact;
     }
 
-    public function updateFromArray($params): MessageBag
+    public function getImagesPath()
+    {
+        return "contacts/$this->id/images/";
+    }
+
+    public function updateFromRequest($request): MessageBag
     {
         // validate input data
-        $validator = Validator::make($params, [
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'address' => 'required',
             'phone' => 'required',
         ]);
 
         // fill form params
-        $this->fill($params);
-        $this->fillMetadata($params['metadata']);
+        $this->fill($request->all());
+        $this->fillMetadata($request->metadata);
 
         // if has errors
         if ($validator->fails()) {
@@ -42,6 +54,17 @@ class Contact extends Model
 
         // save
         $this->save();
+
+        // upload images
+        if ($request->images) {
+            foreach($request->file('images') as $key => $image) {
+                $image = $image->store($this->getImagesPath());
+
+                $this->images()->create([
+                    'path' => $image,
+                ]);
+            }
+        }
 
         return $validator->errors();
     }
@@ -73,5 +96,18 @@ class Contact extends Model
     {
         $this->fillMetadata($data);
         $this->save();
+    }
+
+    public function getImages()
+    {
+        if (!$this->images()->count()) {
+            return collect([]);
+        }
+
+        return $this->images()->get()->map(function ($image) {
+            return route('app_assets', [
+                'path' =>  base64_encode($image->path),
+            ]);
+        });
     }
 }

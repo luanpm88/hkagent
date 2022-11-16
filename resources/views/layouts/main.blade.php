@@ -176,6 +176,22 @@
                         </div>
                     @endif
 
+                    @foreach (['danger', 'success', 'warning', 'info', 'error'] as $msg)
+                        @php
+                            $class = $msg;
+                            if ($msg == 'error') {
+                                $class = 'danger';
+                            }
+                        @endphp
+                        @if(Session::has($msg))
+                            <!-- Form Error List -->
+                            <div class="alert alert-{{ $class }} alert-noborder alert-dismissible mt-2">
+                                <p class="mb-0">{!! preg_replace('/[\r\n]+/', ' ', Session::get($msg)) !!}</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif    
+                    @endforeach
+
                     @yield('content')
                 </main>
             </div>

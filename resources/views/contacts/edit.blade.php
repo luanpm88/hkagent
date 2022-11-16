@@ -1,9 +1,13 @@
 @extends('layouts.main')
 
 @section('content')
-    <form action="{{ action('App\Http\Controllers\ContactController@store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ action('App\Http\Controllers\ContactController@update', [
+        'contact' => $contact,
+    ]) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <h2 class="mt-4">Thêm cửa hàng/đại lý</h2>
+        <input type="hidden" name="_method" value="PATCH" />
+
+        <h2 class="mt-4">Edit: {{ $contact->name }}</h2>
 
         @include('contacts._form')
         

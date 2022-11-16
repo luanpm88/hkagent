@@ -46,7 +46,7 @@ class ContactController extends Controller
         $contact = $request->user()->newContact();
 
         // try to save contact
-        $errors = $contact->updateFromArray($request->all());
+        $errors = $contact->updateFromRequest($request);
 
         // if has error
         if (!$errors->isEmpty()) {
@@ -79,7 +79,11 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contact = Contact::find($id);
+
+        return view('contacts.edit', [
+            'contact' => $contact,
+        ]);
     }
 
     /**
@@ -91,7 +95,21 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $contact = Contact::find($id);
+
+        // try to save contact
+        $errors = $contact->updateFromRequest($request);
+
+        // if has error
+        if (!$errors->isEmpty()) {
+            return response()->view('contacts.edit', [
+                'contact' => $contact,
+                'errors' => $errors,
+            ], 400);
+        }
+
+        return redirect()->action('App\Http\Controllers\ContactController@index')
+            ->with('success', 'Contact was successfully updated!');
     }
 
     /**
@@ -102,6 +120,11 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contact = Contact::find($id);
+        
+        $contact->delete();
+
+        return redirect()->action('App\Http\Controllers\ContactController@index')
+            ->with('success', 'Contact was successfully deleted!');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// app assets
+Route::get('app/assets/{path}', [function ($path) {
+    $path = base64_decode($path);
+
+    if (Storage::exists($path)) {
+        return Storage::response($path);
+    } else {
+        abort(404);
+    }
+}])->name('app_assets');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', function() {
