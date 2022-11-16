@@ -12,9 +12,13 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('contacts.index');
+        $contacts = $request->user()->contacts()->get();
+
+        return view('contacts.index', [
+            'contacts' => $contacts,
+        ]);
     }
 
     /**
@@ -22,9 +26,9 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $contact = Contact::initialize();
+        $contact = $request->user()->newContact();
 
         return view('contacts.create', [
             'contact' => $contact,
@@ -39,9 +43,21 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $contact = Contact::initialize();
+        $contact = $request->user()->newContact();
 
-        var_dump($request->all());die();
+        // try to save contact
+        $errors = $contact->updateFromArray($request->all());
+
+        // if has error
+        if (!$errors->isEmpty()) {
+            return response()->view('contacts.create', [
+                'contact' => $contact,
+                'errors' => $errors,
+            ], 400);
+        }
+
+        return redirect()->action('App\Http\Controllers\ContactController@index')
+            ->with('success', 'Contact was successfully created!');
     }
 
     /**

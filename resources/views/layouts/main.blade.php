@@ -161,6 +161,21 @@
                 </nav>
 
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    @if (count($errors) > 0)
+                        <!-- Form Error List -->
+                        <div class="alert alert-danger alert-noborder alert-dismissible mt-2">
+                            <p class="mb-1"><strong>Something went wrong:</strong></p>
+
+                            <ul class="ps-2 mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li class="mb-0">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
                     @yield('content')
                 </main>
             </div>

@@ -21,37 +21,29 @@
                     <th scope="col">Name</th>
                     <th scope="col">Address</th>
                     <th scope="col">Phone</th>
-                    <th scope="col">Agent</th>
+                    <th scope="col">Contact Name</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Công ty THHH ABC</td>
-                    <td>123 Nguyễn Văn Thới, Ninh Thuận</td>
-                    <td>0976 009 004</td>
-                    <td>Dung Đỗ</td>
-                    <td class="text-end">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Cửa hảng VLXD Vĩnh Xích</td>
-                    <td>123 Xã CGF, Lâm Đồng</td>
-                    <td>0976 009 004</td>
-                    <td>Bằng Đỗ</td>
-                    <td class="text-end">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
-                        </div>
-                    </td>
-                </tr>
+                @foreach ($contacts as $key => $contact)
+                    <tr>
+                        <th scope="row">{{ $key+1 }}</th>
+                        <td>{{ $contact->name }}</td>
+                        <td>{{ $contact->address }}</td>
+                        <td>
+                            <div>{{ $contact->phone }}</div>
+                            <div>{{ $contact->phone_2 }}</div>
+                        </td>
+                        <td>{{ $contact->contact_name }}</td>
+                        <td class="text-end">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

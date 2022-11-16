@@ -7,20 +7,20 @@
 
         <h4 class="mt-4 mb-3">Thông tin</h4>
         <div class="mb-2">
-            <label class="form-label mb-1">Tên cửa hàng</label>
-            <input type="text" name="name" class="form-control" />
+            <label class="form-label mb-1">Tên cửa hàng/đại lý <span class="text-danger">*</span></label>
+            <input type="text" name="name" class="form-control" required />
         </div>
         <div class="mb-2">
-            <label class="form-label mb-1">Địa chỉ</label>
-            <input type="text" name="address" class="form-control" />
+            <label class="form-label mb-1">Địa chỉ <span class="text-danger">*</span></label>
+            <input type="text" name="address" class="form-control" required />
         </div>
         <div class="mb-2">
-            <label class="form-label mb-1">Điện thoại</label>
-            <input type="text" name="phone" class="form-control" />
+            <label class="form-label mb-1">Điện thoại <span class="text-danger">*</span></label>
+            <input type="text" name="phone" class="form-control" required />
         </div>
         <div class="mb-2">
-            <label class="form-label mb-1">Người phụ trách</label>
-            <input disabled type="text" name="user_id" value="{{ Auth::user()->email }}" class="form-control" />
+            <label class="form-label mb-1">Người đại diện</label>
+            <input type="text" name="contact_name" value="" class="form-control" />
         </div>
         <div class="mb-2">
             <label class="form-label mb-1">Điện thoại/Zalo</label>

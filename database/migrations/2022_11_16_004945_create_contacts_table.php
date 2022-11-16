@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('address')->nullable();
+            $table->string('contact_name')->nullable();
             $table->string('phone')->nullable();
             $table->string('phone_2')->nullable();
+            $table->longText('metadata')->nullable();
             $table->timestamps();
             
             // foreign keys
