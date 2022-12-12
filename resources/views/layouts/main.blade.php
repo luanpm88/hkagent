@@ -115,7 +115,7 @@
                     </h6>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="{{ action('App\Http\Controllers\ContactController@index') }}">
                             <span data-feather="file" class="align-text-bottom"></span>
                             Đại lý/Cửa hàng
                             </a>

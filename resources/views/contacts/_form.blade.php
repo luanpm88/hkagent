@@ -25,7 +25,7 @@
 </div>
 <div class="mb-2">
     <label class="form-label mb-1">Note</label>
-    <textarea name="note" value="{{ $contact->note }}" class="form-control"></textarea>
+    <textarea name="note" class="form-control">{{ $contact->note }}</textarea>
 </div>
 
 <h4 class="mt-5 mb-3">Ảnh thực tế</h4>
@@ -55,25 +55,28 @@
     <h6 class="my-2 text-bold">1. Cửa hàng có đang bán bồn nhựa?</h6>
     <div class="form-check">            
         <label class="form-check-label d-block">
-            <input class="form-check-input" type="radio" name="metadata[dang_ban_do_nhua]" value="chua_tung_ban">
+            <input class="form-check-input" {{ $contact->getMetadataByName('dang_ban_do_nhua') == 'chua_tung_ban' ? 'checked' : '' }} type="radio" name="metadata[dang_ban_do_nhua]" value="chua_tung_ban">
             Chưa từng bán
         </label>
     </div>
     <div class="form-check">                
         <label class="form-check-label d-block">
-            <input class="form-check-input" type="radio" name="metadata[dang_ban_do_nhua]" value="truoc_co_ban">
+            <input class="form-check-input" {{ $contact->getMetadataByName('dang_ban_do_nhua') == 'truoc_co_ban' ? 'checked' : '' }} type="radio" name="metadata[dang_ban_do_nhua]" value="truoc_co_ban">
             Trước đây có bán
         </label>
     </div>
     <div class="form-check">                
         <label class="form-check-label d-block">
-            <input class="form-check-input" type="radio" name="metadata[dang_ban_do_nhua]" value="ban_thuong_hieu">
+            <input class="form-check-input" {{ $contact->getMetadataByName('dang_ban_do_nhua') == 'ban_thuong_hieu' ? 'checked' : '' }} type="radio" name="metadata[dang_ban_do_nhua]" value="ban_thuong_hieu">
             Đang bán
         </label>
         <div radio-box-name="metadata[dang_ban_do_nhua]" radio-box-value="ban_thuong_hieu">
             <div class="mb-3 mt-2">
                 <label class="mb-2">Thương hiệu đang bán</label>
-                <input type="text" name="metadata[dang_ban_do_nhua_][ban_thuong_hieu][thuong_hieu_dang_ban]" class="form-control" />
+                <input type="text" name="metadata[dang_ban_do_nhua_][ban_thuong_hieu][thuong_hieu_dang_ban]"
+                    value="{{ $contact->getMetadataByName('dang_ban_do_nhua_') ? $contact->getMetadataByName('dang_ban_do_nhua_')['ban_thuong_hieu']['thuong_hieu_dang_ban'] : '' }}"
+                    class="form-control"
+                />
             </div>
         </div>
     </div>
@@ -83,19 +86,19 @@
     <h6 class="my-2 text-bold">2. Cửa hàng có vị trí trưng bày?</h6>
     <div class="form-check">            
         <label class="form-check-label d-block">
-            <input class="form-check-input" type="radio" name="metadata[co_vi_tri_trung_bay]" value="co">
+            <input class="form-check-input" {{ $contact->getMetadataByName('co_vi_tri_trung_bay') == 'co' ? 'checked' : '' }} type="radio" name="metadata[co_vi_tri_trung_bay]" value="co">
             Có
         </label>
     </div>
     <div class="form-check">                
         <label class="form-check-label d-block">
-            <input class="form-check-input" type="radio" name="metadata[co_vi_tri_trung_bay]" value="khong">
+            <input class="form-check-input" {{ $contact->getMetadataByName('co_vi_tri_trung_bay') == 'khong' ? 'checked' : '' }} type="radio" name="metadata[co_vi_tri_trung_bay]" value="khong">
             Không
         </label>
     </div>
     <div class="form-check">                
         <label class="form-check-label d-block">
-            <input class="form-check-input" type="radio" name="metadata[co_vi_tri_trung_bay]" value="se_sap_xep_cho">
+            <input class="form-check-input" {{ $contact->getMetadataByName('co_vi_tri_trung_bay') == 'se_sap_xep_cho' ? 'checked' : '' }} type="radio" name="metadata[co_vi_tri_trung_bay]" value="se_sap_xep_cho">
             Nếu bán sẽ sắp xếp chỗ trưng bày
         </label>
     </div>
@@ -105,25 +108,27 @@
     <h6 class="my-2 text-bold">3. Yêu cầu của cửa hàng khi nhập hàng?</h6>
     <div class="form-check">            
         <label class="form-check-label d-block">
-            <input class="form-check-input" type="checkbox" name="metadata[yeu_cau]" value="loi_nhuan_cao">
+            <input class="form-check-input" {{ $contact->getMetadataByName('yeu_cau') == 'loi_nhuan_cao' ? 'checked' : '' }} type="checkbox" name="metadata[yeu_cau]" value="loi_nhuan_cao">
             Lợi nhuận cao
         </label>
     </div>
     <div class="form-check">                
         <label class="form-check-label d-block">
-            <input class="form-check-input" type="checkbox" name="metadata[yeu_cau]" value="giao_tan_noi">
+            <input class="form-check-input" {{ $contact->getMetadataByName('yeu_cau') == 'giao_tan_noi' ? 'checked' : '' }} type="checkbox" name="metadata[yeu_cau]" value="giao_tan_noi">
             Giao hàng tận nơi
         </label>
     </div>
     <div class="form-check">                
         <label class="form-check-label d-block">
-            <input class="form-check-input" type="checkbox" name="metadata[yeu_cau]" value="duoc_cong_no" check-for-box="box1">
+            <input class="form-check-input" {{ $contact->getMetadataByName('yeu_cau') == 'duoc_cong_no' ? 'checked' : '' }} type="checkbox" name="metadata[yeu_cau]" value="duoc_cong_no" check-for-box="box1">
             Được công nợ
         </label>
         <div id="box1">
             <div class="mb-3 mt-2">
                 <label class="mb-2">Thòi gian công nợ</label>
-                <input type="text" name="metadata[yeu_cau_][duoc_cong_no][thoi_gian_cong_no]" class="form-control" />
+                <input type="text" name="metadata[yeu_cau_][duoc_cong_no][thoi_gian_cong_no]" class="form-control"
+                    value="{{ $contact->getMetadataByName('yeu_cau_') ? $contact->getMetadataByName('yeu_cau_')['duoc_cong_no']['thoi_gian_cong_no'] : '' }}"
+                />
             </div>
         </div>
     </div>
@@ -141,7 +146,9 @@
         <div id="box2">
             <div class="mb-3 mt-2">
                 <label class="mb-2">Nhập yêu cầu</label>
-                <input type="text" name="metadata[yeu_cau_][khac]" class="form-control" />
+                <input type="text" name="metadata[yeu_cau_][khac]" class="form-control"
+                value="{{ $contact->getMetadataByName('yeu_cau_') ? $contact->getMetadataByName('yeu_cau_')['khac'] : '' }}"
+                />
             </div>
         </div>
     </div>

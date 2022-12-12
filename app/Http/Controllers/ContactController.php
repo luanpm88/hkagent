@@ -14,7 +14,7 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
-        $contacts = $request->user()->contacts()->get();
+        $contacts = $request->user()->contacts()->paginate();
 
         return view('contacts.index', [
             'contacts' => $contacts,
@@ -56,8 +56,13 @@ class ContactController extends Controller
             ], 400);
         }
 
-        return redirect()->action('App\Http\Controllers\ContactController@index')
-            ->with('success', 'Contact was successfully created!');
+        if ($request->save_close) {
+            return redirect()->action('App\Http\Controllers\ContactController@index')
+                ->with('success', 'Contact was successfully created!');
+        } else {
+            return redirect()->action('App\Http\Controllers\ContactController@edit', $contact)
+                ->with('success', 'Contact was successfully created!');
+        }
     }
 
     /**
@@ -108,8 +113,13 @@ class ContactController extends Controller
             ], 400);
         }
 
-        return redirect()->action('App\Http\Controllers\ContactController@index')
-            ->with('success', 'Contact was successfully updated!');
+        if ($request->save_close) {
+            return redirect()->action('App\Http\Controllers\ContactController@index')
+                ->with('success', 'Contact was successfully updated!');
+        } else {
+            return redirect()->action('App\Http\Controllers\ContactController@edit', $contact)
+                ->with('success', 'Contact was successfully updated!');
+        }
     }
 
     /**

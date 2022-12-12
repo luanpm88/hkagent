@@ -9,7 +9,8 @@
         
         <div class="mt-4 mb-5 pt-4 border-top text-center">
             <button type="submit" class="btn btn-primary me-1">Save</button>
-            <a href="{{ action('App\Http\Controllers\ContactController@index') }}" class="btn btn-secondary">
+            <input type="submit" name="save_close" class="btn btn-secondary me-1" value="Save & Back to List" />
+            <a href="{{ action('App\Http\Controllers\ContactController@index') }}" class="btn btn-light">
                 Cancel
             </a>
         </div>
