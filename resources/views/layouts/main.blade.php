@@ -82,7 +82,7 @@
             </button>
             <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
             <span class="px-3 text-light">
-                <span class="d-flex align-items-center">
+                <span class="d-flex align-items-center text-nowrap">
                     <span class="material-symbols-rounded me-1">
                         account_circle
                     </span>
