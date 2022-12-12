@@ -73,7 +73,7 @@
     </head>
     <body>        
         <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{{ action('App\Http\Controllers\ContactController@index') }}">
                 <img src="{{ url('logo.png') }}" width="35px" />
                 <span class="text-muted ms-1 fw-bold">LONGNHIEN</span>
             </a>
