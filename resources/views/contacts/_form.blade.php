@@ -23,11 +23,18 @@
     <label class="form-label mb-1">Email</label>
     <input type="email" name="email" value="{{ $contact->email }}" class="form-control" />
 </div>
+<div class="mb-2">
+    <label class="form-label mb-1">Note</label>
+    <textarea name="note" value="{{ $contact->note }}" class="form-control"></textarea>
+</div>
 
 <h4 class="mt-5 mb-3">Ảnh thực tế</h4>
 <div class="d-flex">
-    @for ($i = 0;$i < 4;$i++)
-        <div image-capture-id="image{{ $i }}" class="d-inline-block me-3 pic-input-capture-box border rounded p-2 shadow-sm" style="cursor: pointer;">
+    @for ($i = 0;$i < 5;$i++)
+        @php
+            $image = $contact->getImages()->values()->get($i);
+        @endphp
+        <div current-image-id="{{ $image ? $image->id : '' }}" image-capture-id="image{{ $i }}" class="d-inline-block me-3 pic-input-capture-box border rounded p-2 shadow-sm" style="cursor: pointer;">
             <div>
                 <div id="image{{ $i }}Placeholder">
                     <span style="width: 100px;height:100px;" class="d-inline-block d-flex align-items-center justify-content-center">
@@ -36,7 +43,7 @@
                         </span>
                     </span>
                 </div>
-                <img height="100px" id="image{{ $i }}Thumb" src="" style="display:none" />
+                <img height="100px" id="image{{ $i }}Thumb" src="{{ $image ? $image->getUrl() : '' }}" />
             </div>
             <input id="image{{ $i }}" type="file" name="images[]" accept="image/*;capture=camera" style="display:none;">
         </div>
@@ -139,3 +146,165 @@
         </div>
     </div>
 </div>
+
+<script>
+    var ImageCaptureBoxes = {
+        groups: [],
+        
+        addGroup: function(groupBox) {
+            var _this = this;
+            var id = groupBox.attr('image-capture-id');
+            var group = {
+                box: groupBox,
+                input: $('#' + id),
+                thumb: $('#' + id + 'Thumb'),
+                placeholder: $('#' + id + 'Placeholder'),
+                image_id: groupBox.attr('current-image-id'),
+            };
+
+            group.toggle = function() {
+                if (group.thumb.attr('src') != '') {
+                    group.thumb.show();
+                    group.placeholder.hide();
+                } else {
+                    group.thumb.hide();
+                    group.placeholder.show();
+                }
+            }
+
+            group.setDelete = function()
+            {
+                
+            }
+
+            group.toggle();
+
+            _this.groups.push(group);
+
+            // event
+            _this.addEvents(group);
+        },
+
+        addEvents: function(group) {
+            group.selectFile = function(file) {
+                group.thumb[0].src = URL.createObjectURL(file);
+
+                group.toggle();
+
+                group.setDelete();
+            };
+
+            // click to box
+            group.box.on('mouseup', function() {
+                group.input.trigger('click');
+            });
+
+            // file change
+            group.input.on('change', function() {
+                var file = group.input[0].files[0];
+                group.selectFile(file);
+            });
+        }
+    }
+
+    class CheckGroups {
+        constructor() {
+            this.groups = [];
+        }
+
+        addGroup(checker) {
+            var id = checker.attr('check-for-box');
+            var box = $('#'+id);
+
+            var group = {
+                checker: checker,
+                box: box
+            }
+            this.groups.push(group)
+
+            this.addEvents(group);
+        }
+
+        addEvents(group) {
+            group.toggle = function() {
+                var checked = group.checker.is(':checked');
+
+                if (checked) {
+                    group.box.slideDown();
+                } else {
+                    group.box.hide();
+                }
+            };
+            
+            group.toggle();
+            group.checker.on('change', function() {                    
+                group.toggle();
+            });
+        }
+    }
+
+    class RadioBoxes {
+        constructor(name) {
+            var _this = this;
+            this.name = name;
+            this.radios = $('[name="'+name+'"]');
+            this.getCheckedRadio = function() {
+                return $('[name="'+name+'"]:checked');
+            };
+            this.boxes = [];
+
+            // event
+            this.radios.on('change', function() {
+                _this.boxes.forEach(function(box, index) {
+                    _this.toggleBox(box);
+                });
+            });
+        }
+
+        getValue() {
+            if (this.getCheckedRadio().length) {
+                return this.getCheckedRadio().val();
+            } else {
+                return null;
+            }
+        }
+
+        addBox(box, value) {
+            var box = {
+                box: box,
+                value: value,
+            }
+
+            this.boxes.push(box);
+
+            this.toggleBox(box);
+        }
+
+        toggleBox(box) {
+            if (this.getValue() == box.value) {
+                box.box.slideDown();
+            } else {
+                box.box.hide();
+            }
+        }
+    }
+
+    $(function() {
+        // initialize images selectors
+        $('[image-capture-id]').each(function(index,box) {
+            ImageCaptureBoxes.addGroup($(box));
+        });
+
+        // initialize checkbox groups
+        var checkGroups = new CheckGroups();
+        $('[check-for-box]').each(function(index,input) {
+            checkGroups.addGroup($(input));
+        });
+
+        // initialize radio groups
+        var radioBoxes = new RadioBoxes('metadata[dang_ban_do_nhua]');
+        $('[radio-box-name="metadata[dang_ban_do_nhua]"]').each(function() {
+            radioBoxes.addBox($(this), $(this).attr('radio-box-value'));
+        });
+    });
+</script>

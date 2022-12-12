@@ -81,9 +81,24 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+            <span class="px-3 text-light">
+                <span class="d-flex align-items-center">
+                    <span class="material-symbols-rounded me-1">
+                        account_circle
+                    </span>
+                    <span>{{ Auth::user()->name }}</span>
+                </span>
+            </span>
             <div class="navbar-nav">
                 <div class="nav-item text-nowrap">
-                    <a class="nav-link px-3" href="#">Đỗ Thị Ngọc Dung | Sign out</a>
+                    
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <a onclick="$(this).closest('form').submit();" type="submit" id="signout" class="nav-link px-3" href="javascript:;">
+                            Sign out
+                        </a>
+                    </form>
                 </div>
             </div>
         </header>
@@ -196,5 +211,10 @@
                 </main>
             </div>
         </div>
+        <script>
+            $(function() {
+               
+            })
+        </script>
     </body>
 </html>

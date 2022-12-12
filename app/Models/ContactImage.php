@@ -12,4 +12,11 @@ class ContactImage extends Model
     protected $fillable = [
         'path'
     ];
+
+    public function getUrl()
+    {
+        return route('app_assets', [
+            'path' =>  base64_encode($this->path),
+        ]);
+    }
 }

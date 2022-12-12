@@ -32,7 +32,7 @@
                         <th scope="row">{{ $key+1 }}</th>
                         <td>
                             @if ($contact->getImages()->count())
-                                <img src="{{ $contact->getImages()->first() }}" width="50px" />
+                                <img src="{{ $contact->getImages()->first()->getUrl() }}" width="50px" />
                             @endif
                         </td>
                         <td>{{ $contact->name }}</td>

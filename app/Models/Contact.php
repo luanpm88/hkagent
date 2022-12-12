@@ -14,7 +14,7 @@ class Contact extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'email', 'address', 'phone', 'phone_2'
+        'name', 'email', 'address', 'phone', 'phone_2', 'note'
     ];
 
     public function images()
@@ -104,10 +104,6 @@ class Contact extends Model
             return collect([]);
         }
 
-        return $this->images()->get()->map(function ($image) {
-            return route('app_assets', [
-                'path' =>  base64_encode($image->path),
-            ]);
-        });
+        return $this->images()->get();
     }
 }
