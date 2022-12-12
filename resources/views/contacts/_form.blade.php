@@ -34,8 +34,8 @@
         @php
             $image = $contact->getImages()->values()->get($i);
         @endphp
-        <div current-image-id="{{ $image ? $image->id : '' }}" image-capture-id="image{{ $i }}" class="d-inline-block me-3 pic-input-capture-box border rounded p-2 shadow-sm" style="cursor: pointer;">
-            <div>
+        <div class="d-inline-block me-3 pic-input-capture-box border rounded p-2 shadow-sm position-relative" style="cursor: pointer;">
+            <div current-image-id="{{ $image ? $image->id : '' }}" image-capture-id="image{{ $i }}">
                 <div id="image{{ $i }}Placeholder">
                     <span style="width: 100px;height:100px;" class="d-inline-block d-flex align-items-center justify-content-center">
                         <span class="material-symbols-rounded fs-1 text-muted">
@@ -47,8 +47,24 @@
             </div>
             <input id="image{{ $i }}" type="file" name="images[]" accept="image/*;capture=camera" style="display:none;">
             @if ($image)
-                <input id="image{{ $i }}Delete" type="text" name="delete_images[{{ $image->id }}]" value="no" />
+                <input id="image{{ $i }}Delete" type="hidden" name="delete_images[{{ $image->id }}]" value="no" />
             @endif
+            <span id="image{{ $i }}RemoveButton" class=""
+                style="
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    border-radius: 100%;
+                    background: red;
+                    display: flex;
+                    padding: 5px;
+                "
+            >
+                <span class="material-symbols-rounded text-white">
+                    delete
+                </span>
+            </span>
+            
         </div>
     @endfor
 </div>
@@ -171,24 +187,35 @@
                 placeholder: $('#' + id + 'Placeholder'),
                 image_id: groupBox.attr('current-image-id'),
                 delele_image_input: $('#'+id+'Delete'),
+                remove_button: $('#'+id+'RemoveButton'),
+            };
+
+            group.showThumb = function() {
+                group.thumb.show();
+                group.placeholder.hide();
+                group.remove_button.show();
+            };
+
+            group.removeThumb = function() {
+                group.thumb.hide();
+                group.placeholder.show();
+                group.remove_button.hide();
             };
 
             group.toggle = function() {
                 if (group.thumb.attr('src') != '') {
-                    group.thumb.show();
-                    group.placeholder.hide();
+                    group.showThumb();
                 } else {
-                    group.thumb.hide();
-                    group.placeholder.show();
+                    group.removeThumb();
                 }
-            }
+            };
 
             group.setDeleteIfExist = function()
             {
                 if (group.delele_image_input.length) {
                     group.delele_image_input.val('yes');
                 }
-            }
+            };
 
             group.toggle();
 
@@ -212,6 +239,13 @@
             // click to box
             group.box.on('mouseup', function() {
                 group.input.trigger('click');
+            });
+
+            group.remove_button.on('click', function() {
+                group.input[0].value = null;
+                
+                group.setDeleteIfExist();
+                group.removeThumb();
             });
 
             // file change
