@@ -31,7 +31,7 @@ class Contact extends Model
 
     public function getImagesPath()
     {
-        return "contacts/$this->id/images/";
+        return "contacts/$this->id/images";
     }
 
     public function updateFromRequest($request): MessageBag
@@ -58,11 +58,21 @@ class Contact extends Model
         // upload images
         if ($request->images) {
             foreach($request->file('images') as $key => $image) {
-                $image = $image->store($this->getImagesPath());
+                $path = $image->store($this->getImagesPath());
 
                 $this->images()->create([
-                    'path' => $image,
+                    'path' => $path,
                 ]);
+            }
+        }
+
+        // delete images
+        if($request->delete_images) {
+            foreach($request->delete_images as $deleteId => $ok) {
+                if ($ok == 'yes') {
+                    $image = ContactImage::find($deleteId);
+                    $image->deleteAndCleanup();
+                }
             }
         }
 

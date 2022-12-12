@@ -46,6 +46,9 @@
                 <img height="100px" id="image{{ $i }}Thumb" src="{{ $image ? $image->getUrl() : '' }}" />
             </div>
             <input id="image{{ $i }}" type="file" name="images[]" accept="image/*;capture=camera" style="display:none;">
+            @if ($image)
+                <input id="image{{ $i }}Delete" type="text" name="delete_images[{{ $image->id }}]" value="no" />
+            @endif
         </div>
     @endfor
 </div>
@@ -167,6 +170,7 @@
                 thumb: $('#' + id + 'Thumb'),
                 placeholder: $('#' + id + 'Placeholder'),
                 image_id: groupBox.attr('current-image-id'),
+                delele_image_input: $('#'+id+'Delete'),
             };
 
             group.toggle = function() {
@@ -179,9 +183,11 @@
                 }
             }
 
-            group.setDelete = function()
+            group.setDeleteIfExist = function()
             {
-                
+                if (group.delele_image_input.length) {
+                    group.delele_image_input.val('yes');
+                }
             }
 
             group.toggle();
@@ -194,11 +200,13 @@
 
         addEvents: function(group) {
             group.selectFile = function(file) {
+                // preview browsed image
                 group.thumb[0].src = URL.createObjectURL(file);
 
                 group.toggle();
 
-                group.setDelete();
+                // mark as replaced
+                group.setDeleteIfExist();
             };
 
             // click to box
