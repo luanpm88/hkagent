@@ -1,4 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.main', [
+    'menu' => 'contact',
+])
 
 @section('content')
     <form action="{{ action('App\Http\Controllers\ContactController@update', [

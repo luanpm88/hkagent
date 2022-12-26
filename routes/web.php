@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth']], function () {
     })->name('dashboard');
 
     Route::resource('/contacts', 'App\Http\Controllers\ContactController');
+
+    Route::get('/prices/seller', 'App\Http\Controllers\PriceController@seller');
 });
 
 require __DIR__.'/auth.php';

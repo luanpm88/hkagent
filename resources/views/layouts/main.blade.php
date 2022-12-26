@@ -115,13 +115,19 @@
                     </h6>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ action('App\Http\Controllers\ContactController@index') }}">
+                            <a class="nav-link {{ $menu == 'contact' ? 'active' : '' }}" href="{{ action('App\Http\Controllers\ContactController@index') }}">
                             <span data-feather="file" class="align-text-bottom"></span>
                             Đại lý/Cửa hàng
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link {{ $menu == 'price' ? 'active' : '' }}" href="{{ action('App\Http\Controllers\PriceController@seller') }}">
+                            <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                            Bảng giá đại lý
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ $menu == 'order' ? 'active' : '' }}" href="#">
                             <span data-feather="shopping-cart" class="align-text-bottom"></span>
                             Đơn hàng
                             </a>

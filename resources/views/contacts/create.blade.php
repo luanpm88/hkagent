@@ -1,4 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.main', [
+    'menu' => 'contact',
+])
 
 @section('content')
     <form action="{{ action('App\Http\Controllers\ContactController@store') }}" method="POST" enctype="multipart/form-data">
