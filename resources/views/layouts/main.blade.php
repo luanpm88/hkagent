@@ -127,19 +127,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ $menu == 'order' ? 'active' : '' }}" href="#">
+                            <a class="nav-link {{ $menu == 'order' ? 'active' : '' }} text-muted pe-none" href="#">
                             <span data-feather="shopping-cart" class="align-text-bottom"></span>
                             Đơn hàng
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link text-muted pe-none" href="#">
                             <span data-feather="users" class="align-text-bottom"></span>
                             Sản phẩm
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link text-muted pe-none" href="#">
                             <span data-feather="bar-chart-2" class="align-text-bottom"></span>
                             Báo cáo
                             </a>
@@ -154,25 +154,25 @@
                     </h6>
                     <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link text-muted pe-none" href="#">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                             Current month
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link text-muted pe-none" href="#">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                             Last quarter
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link text-muted pe-none" href="#">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                             Social engagement
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link text-muted pe-none" href="#">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                             Year-end sale
                         </a>
