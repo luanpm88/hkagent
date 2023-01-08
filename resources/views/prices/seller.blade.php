@@ -10,8 +10,6 @@
     </div>
 
     <div>
-        {{-- <img src="{{ url('image/BonNuocLongNhien-BangGiaDaiLy.png') }}" width="100%" /> --}}
-
         <table class="table">
             @foreach ($values as $num => $cols)
                 @if ($num >= 9)
