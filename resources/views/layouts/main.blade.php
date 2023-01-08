@@ -121,9 +121,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ $menu == 'price' ? 'active' : '' }}" href="{{ action('App\Http\Controllers\PriceController@seller') }}">
+                            <a class="nav-link {{ $menu == 'price_seller' ? 'active' : '' }}" href="{{ action('App\Http\Controllers\PriceController@seller') }}">
                             <span data-feather="shopping-cart" class="align-text-bottom"></span>
                             Bảng giá đại lý
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ $menu == 'price_customer' ? 'active' : '' }}" href="{{ action('App\Http\Controllers\PriceController@customer') }}">
+                            <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                            Bảng giá bán lẻ
                             </a>
                         </li>
                         <li class="nav-item">

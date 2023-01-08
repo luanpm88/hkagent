@@ -1,5 +1,5 @@
 @extends('layouts.main', [
-    'menu' => 'price_seller',
+    'menu' => 'price_customer',
 ])
 
 @section('content')
