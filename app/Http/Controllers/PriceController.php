@@ -33,7 +33,7 @@ class PriceController extends Controller
         // dd($sheet);
         
         
-        $client->addScope(\Google\Service\DRIVE::DRIVE);
+        $client->addScope(\Google\Service\Drive::DRIVE);
 
         $service = new \Google\Service\Drive($client);
 
@@ -69,7 +69,7 @@ class PriceController extends Controller
 
         $client = new \Google\Client();
         $client->useApplicationDefaultCredentials();
-        $client->addScope(\Google\Service\DRIVE::DRIVE);
+        $client->addScope(\Google\Service\Drive::DRIVE);
         $service = new \Google\Service\Drive($client);
 
         $fileId = '1t-yIOPYhb1WfpiNbAv4ww_otnospOzKaYaX4C5E6J2g';
