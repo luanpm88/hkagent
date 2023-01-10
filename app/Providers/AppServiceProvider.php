@@ -14,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Google credentials init
+        putenv('GOOGLE_APPLICATION_CREDENTIALS=' . env('GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION'));
     }
 
     /**
