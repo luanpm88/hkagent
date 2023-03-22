@@ -25,6 +25,7 @@
                     <th scope="col">Address</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Contact Name</th>
+                    <th>Agent</th>
                     <th></th>
                 </tr>
             </thead>
@@ -56,6 +57,7 @@
                             <div>{{ $contact->phone_2 }}</div>
                         </td>
                         <td>{{ $contact->contact_name }}</td>
+                        <td>{{ $contact->user->name }}</td>
                         <td class="text-end">
                             <div class="btn-group me-2">
                                 <a href="{{ action('App\Http\Controllers\ContactController@edit', [

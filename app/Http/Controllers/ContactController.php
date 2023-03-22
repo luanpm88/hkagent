@@ -14,7 +14,11 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
-        $contacts = $request->user()->contacts()->paginate();
+        if ($request->user()->isAdmin()) {
+            $contacts = Contact::paginate();
+        } else {
+            $contacts = $request->user()->contacts()->paginate();
+        }
 
         return view('contacts.index', [
             'contacts' => $contacts,

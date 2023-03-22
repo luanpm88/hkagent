@@ -55,4 +55,9 @@ class User extends Authenticatable
 
         return $contact;
     }
+
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
 }

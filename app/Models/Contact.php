@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use App\Models\ContactImage;
-use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 class Contact extends Model
 {
@@ -16,6 +16,11 @@ class Contact extends Model
     protected $fillable = [
         'name', 'email', 'address', 'phone', 'phone_2', 'note'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function images()
     {
