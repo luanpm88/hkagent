@@ -41,6 +41,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/prices/customer/download', 'App\Http\Controllers\PriceController@customerDownload');
     Route::get('/prices/customer', 'App\Http\Controllers\PriceController@customer');
+
+    Route::get('/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
+    Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
 });
 
 require __DIR__.'/auth.php';
