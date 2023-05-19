@@ -1,5 +1,5 @@
 @extends('layouts.main', [
-    'menu' => 'contact',
+    'menu' => 'change_password',
 ])
 
 @section('content')
