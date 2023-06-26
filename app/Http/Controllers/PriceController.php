@@ -47,7 +47,7 @@ class PriceController extends Controller
     
         return response()->make($content, 200, [
             'Content-type'        => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="BonNuocLongNhie_BangGiaDaiLy.pdf"',
+            'Content-Disposition' => 'attachment; filename="BonNuocLongNhien_BangGiaDaiLy.pdf"',
         ]);
     }
 
@@ -69,7 +69,7 @@ class PriceController extends Controller
     
         return response()->make($content, 200, [
             'Content-type'        => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="BonNuocLongNhie_BangGiaBanLe.pdf"',
+            'Content-Disposition' => 'attachment; filename="BonNuocLongNhien_BangGiaBanLe.pdf"',
         ]);
     }
 }
